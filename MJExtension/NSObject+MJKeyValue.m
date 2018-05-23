@@ -319,6 +319,12 @@ static NSNumberFormatter *numberFormatter_;
             id value = [property valueForObject:self];
             if (!value) return;
             
+            if ([value isKindOfClass:[NSNumber class]]) {
+                //NSLog(@"数字类型");
+                value = (NSNumber *)value;
+                if ([value integerValue] == 0 || [value boolValue] == NO) return;
+            }
+            
             // 2.如果是模型属性
             MJPropertyType *type = property.type;
             Class propertyClass = type.typeClass;
